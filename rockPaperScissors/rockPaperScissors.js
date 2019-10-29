@@ -20,25 +20,17 @@
 */
 let actions = ['R', 'P', 'S'];
 
-var rockPaperScissors = function(num) {
-  // TODO: your solution here
+var getSequences = function(ntimes, arr=actions) {
     let solutionsArr = [];
-
-    let roundsPlayed = 0;
-    let solutionsArrSize = Math.pow(3, num);
-    for (let i = 0; i < solutionsArrSize; i++) {
-        solutionsArr[i] += actions[(i % 3)];
-    }
-    for (let j = 0; i < solutionsArrSize / (3 * roundsPlayed); j++) {
-        for (let k of actions) {
-            // solutionsArr[j * ]
+    if (ntimes === 1) {
+        return arr;
+    } else {
+        for (let j = 0; j < arr.length; j++) {
+            for (let k of actions) {
+                solutionsArr.push(arr[j] + k);
+            }
         }
+        solutionsArr = getSequences(ntimes - 1, solutionsArr);
     }
-    
+    return solutionsArr;
 };
-
-var pushRecursive = function(term) {
-    let sequence = '';
-
-};
-

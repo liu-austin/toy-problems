@@ -23,10 +23,10 @@ var evenOccurrence = function(arr) {
       delete multipleEvenOccurrences[arr[i]];
     }
   }
-  if (typeof(Object.keys(multipleEvenOccurrences).sort((a, b) => {
+  if (Number(Object.keys(multipleEvenOccurrences).sort((a, b) => {
     
     return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
-  })[0]) === 'number') {
+  })[0])) {
     return Number(Object.keys(multipleEvenOccurrences).sort((a, b) => {
       return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
     })[0]);

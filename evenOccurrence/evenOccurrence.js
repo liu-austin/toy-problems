@@ -23,7 +23,19 @@ var evenOccurrence = function(arr) {
       delete multipleEvenOccurrences[arr[i]];
     }
   }
-  return Number(Object.keys(multipleEvenOccurrences).sort((a, b) => {
+  if (typeof(Object.keys(multipleEvenOccurrences).sort((a, b) => {
     return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
-  })[0]);
+  })[0]) === 'number') {
+    return Number(Object.keys(multipleEvenOccurrences).sort((a, b) => {
+      return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
+    })[0]);
+  } else if (Object.keys(multipleEvenOccurrences).sort((a, b) => {
+    return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
+  }).length === 0) {
+    return null;
+  } else {
+    return (Object.keys(multipleEvenOccurrences).sort((a, b) => {
+      return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
+    })[0]);
+  }
 };

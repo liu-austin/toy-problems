@@ -1,3 +1,4 @@
+// jshint esversion:6
 /*
  * Find the first item that occurs an even number of times in an array.
  * Remember to handle multiple even-occurrence items and return the first one. 
@@ -12,4 +13,17 @@
 
 var evenOccurrence = function(arr) {
   // Your code here.
+  let storage = {};
+  let multipleEvenOccurrences = {};
+  for (let i = 0; i < arr.length; i++) {
+    storage[arr[i]] = storage[arr[i]] + 1 || 1;
+    if (storage[arr[i]] % 2 === 0) {
+      multipleEvenOccurrences[arr[i]] = arr.indexOf(arr[i]);
+    } else if (multipleEvenOccurrences[arr[i]] !== undefined) {
+      delete multipleEvenOccurrences[arr[i]];
+    }
+  }
+  return Number(Object.keys(multipleEvenOccurrences).sort((a, b) => {
+    return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
+  })[0]);
 };

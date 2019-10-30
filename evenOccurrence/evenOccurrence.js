@@ -24,6 +24,7 @@ var evenOccurrence = function(arr) {
     }
   }
   if (typeof(Object.keys(multipleEvenOccurrences).sort((a, b) => {
+    
     return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
   })[0]) === 'number') {
     return Number(Object.keys(multipleEvenOccurrences).sort((a, b) => {
@@ -34,6 +35,9 @@ var evenOccurrence = function(arr) {
   }).length === 0) {
     return null;
   } else {
+    console.log(typeof(Object.keys(multipleEvenOccurrences).sort((a, b) => {
+      return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
+    })[0]));
     return (Object.keys(multipleEvenOccurrences).sort((a, b) => {
       return multipleEvenOccurrences[a] - multipleEvenOccurrences[b];
     })[0]);

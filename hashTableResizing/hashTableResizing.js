@@ -34,7 +34,7 @@ var makeHashTable = function(storageLimit = 4) {
     var newBucket = [];
     result.storage[index] = newBucket;
   }
-  if (result.storage[index].length > 0) {
+  if (result.storage[index].length) {
     for (let i = 0; i < result.storage[index].length; i++) {
       if (result.storage[index][i][0] === k) {
         result.storage[index][i][1] = v;
@@ -64,17 +64,20 @@ var makeHashTable = function(storageLimit = 4) {
 
   result.retrieve = function(k) {
   let index = getIndexBelowMaxForKey(k, result.storageLimit);
+  if (result.storage[index].length) {
   for (let i = 0; i < result.storage[index].length; i++) {
     if (result.storage[index][i][0] === k) {
       return result.storage[index][i][1];
     }
   }
+}
     return undefined;
     // TODO: implement `retrieve`
   };
 
   result.remove = function(k) {
   let index = getIndexBelowMaxForKey(k, result.storageLimit);
+  if (result.storage[index].length) {
   for (let i = 0; i < result.storage[index].length; i++) {
     if (result.storage[index][i][0] === k) {
       delete result.storage[index][i];
@@ -92,14 +95,15 @@ var makeHashTable = function(storageLimit = 4) {
       }
     }
   }
+}
     // TODO: implement `remove`
   };
 
   return result;
 };
 
-var first = makeHashTable();
-first.insert('name', 'Tom');
-first.insert('age', 10);
-first.insert('color', 'green');
-first.insert('species', 'turtle');
+// var first = makeHashTable();
+// first.insert('name', 'Tom');
+// first.insert('age', 10);
+// first.insert('color', 'green');
+// first.insert('species', 'turtle');

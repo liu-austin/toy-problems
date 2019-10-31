@@ -1,3 +1,4 @@
+// jshint esversion:6
 /**
  * Create a hash table with `insert()`, `retrieve()`, and `remove()` methods.
  * Be sure to handle hashing collisions correctly.
@@ -20,26 +21,83 @@ var getIndexBelowMaxForKey = function(str, max) {
   return hash % max;
 };
 
-var makeHashTable = function() {
+var makeHashTable = function(storageLimit = 4) {
   var result = {};
-  var storage = [];
-  var storageLimit = 4;
-  var size = 0;
+  result.storage = [];
+  result.storageLimit = storageLimit;
+  result.size = 0;
+
+  result.insert = function(k, v) {
+  let index = getIndexBelowMaxForKey(k, result.storageLimit);
+  var bucket = result.storage[index];
+  if (!bucket) {
+    var newBucket = [];
+    result.storage[index] = newBucket;
+  }
+  if (result.storage[index].length > 0) {
+    for (let i = 0; i < result.storage[index].length; i++) {
+      if (result.storage[index][i][0] === k) {
+        result.storage[index][i][1] = v;
+      }
+    }
+  }
+    result.storage[index].push([k, v]);
+    result.size += 1;
+    if (result.size > 0.75 * result.storageLimit) {
+      result.storageLimit *= 2;
+      let newHashTable = makeHashTable(result.storageLimit);
+      for (let j = 0; j < result.storage.length; j++) {
+        if (result.storage[j]) {
+          for (let k = 0; k < result.storage[j].length; k++) {
+            console.log(result.storage[j][k]);
+            newHashTable.insert(result.storage[j][k][0], result.storage[j][k][1]);
+          }
+        }
+      }
+      result = newHashTable;
+    }
   
-  result.insert = function(/*...*/ 
-) {
+
     // TODO: implement `insert`
+
   };
 
-  result.retrieve = function(/*...*/ 
-) {
+  result.retrieve = function(k) {
+  let index = getIndexBelowMaxForKey(k, result.storageLimit);
+  for (let i = 0; i < result.storage[index].length; i++) {
+    if (result.storage[index][i][0] === k) {
+      return result.storage[index][i][1];
+    }
+  }
     // TODO: implement `retrieve`
   };
 
-  result.remove = function(/*...*/ 
-) {
+  result.remove = function(k) {
+  let index = getIndexBelowMaxForKey(k, result.storageLimit);
+  for (let i = 0; i < result.storage[index].length; i++) {
+    if (result.storage[index][i][0] === k) {
+      result.storage[index].splice(i, 1);
+      result.size -= 1;
+      if (result.size < 0.25 * result.storageLimit) {
+        result.storageLimit /= 2;
+        let newHashTable = makeHashTable(result.storageLimit);
+        for (let j = 0; j < result.storage.length; j++) {
+          for (let k = 0; k < result.storage[j].length; k++) {
+            newHashTable.insert(result.storage[j][k][0], result.storage[j][k][1]);
+          }
+        }
+        result = newHashTable;
+      }
+    }
+  }
     // TODO: implement `remove`
   };
 
   return result;
 };
+
+var first = makeHashTable();
+first.insert('name', 'Tom');
+first.insert('age', 10);
+first.insert('color', 'green');
+first.insert('species', 'turtle');

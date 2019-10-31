@@ -69,6 +69,7 @@ var makeHashTable = function(storageLimit = 4) {
       return result.storage[index][i][1];
     }
   }
+    return undefined;
     // TODO: implement `retrieve`
   };
 
@@ -76,6 +77,7 @@ var makeHashTable = function(storageLimit = 4) {
   let index = getIndexBelowMaxForKey(k, result.storageLimit);
   for (let i = 0; i < result.storage[index].length; i++) {
     if (result.storage[index][i][0] === k) {
+      delete result.storage[index][i];
       result.storage[index].splice(i, 1);
       result.size -= 1;
       if (result.size < 0.25 * result.storageLimit) {

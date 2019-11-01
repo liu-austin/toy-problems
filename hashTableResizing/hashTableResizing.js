@@ -87,8 +87,10 @@ var makeHashTable = function(storageLimit = 4) {
         result.storageLimit /= 2;
         let newHashTable = makeHashTable(result.storageLimit);
         for (let j = 0; j < result.storage.length; j++) {
-          for (let k = 0; k < result.storage[j].length; k++) {
-            newHashTable.insert(result.storage[j][k][0], result.storage[j][k][1]);
+          if (result.storage[j].length) {
+            for (let k = 0; k < result.storage[j].length; k++) {
+              newHashTable.insert(result.storage[j][k][0], result.storage[j][k][1]);
+            }
           }
         }
         result = newHashTable;

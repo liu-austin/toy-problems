@@ -30,11 +30,18 @@
  * Constraint 2: Do this in constant space
  * Constraint 3: Do not mutate the original nodes in any way
  */
+var key = 0;
 
 var Node = function(value) {
+  key += 1;
   return { value: value, next: null };
 };
 
 var hasCycle = function(linkedList) {
   // TODO: implement me!
+  var current = linkedList;
+  for (var i = 0; i < key; i++) {
+    current = current.next;
+  }
+  return current ? true : false;
 };

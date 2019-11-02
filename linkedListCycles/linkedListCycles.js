@@ -30,18 +30,22 @@
  * Constraint 2: Do this in constant space
  * Constraint 3: Do not mutate the original nodes in any way
  */
-var key = 0;
+var lastNode;
 
 var Node = function(value) {
-  key += 1;
-  return { value: value, next: null };
+  lastNode = { value: value, next: null };
+  return lastNode;
 };
 
 var hasCycle = function(linkedList) {
   // TODO: implement me!
+  var lastNodeAppearances = 0;
   var current = linkedList;
-  for (var i = 0; i < key; i++) {
+  while (lastNodeAppearances < 2 && current.next) {
     current = current.next;
+    if (current === lastNode) {
+      lastNodeAppearances += 1;
+    }
   }
-  return current ? true : false;
+  return lastNodeAppearances > 1 ? true : false;
 };

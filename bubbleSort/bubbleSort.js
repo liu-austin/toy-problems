@@ -43,7 +43,7 @@ var bubbleSort = function(array) {
   // let maxIndex = 0;
   // let minElem = maxElem;
   // let minIndex = maxIndex;
-  sorted = true;
+  let sorted = true;
 
   for (let i = 0; i < array.length - 1; i++) {
     firstVal = sortedArr[i];

@@ -1,4 +1,4 @@
-/*jshint expr:true*/
+/*jshint esversion:6*/
 
 /*
  * Bubble sort is the most basic sorting algorithm in all of Computer
@@ -35,4 +35,48 @@
 
 var bubbleSort = function(array) {
   // Your code here.
+  let firstVal;
+  let secondVal;
+  let storageVal;
+  let sortedArr = array;
+  // let maxElem = sortedArr[0];
+  // let maxIndex = 0;
+  // let minElem = maxElem;
+  // let minIndex = maxIndex;
+  sorted = true;
+
+  for (let i = 0; i < array.length - 1; i++) {
+    firstVal = sortedArr[i];
+    secondVal = sortedArr[i + 1];
+    if (firstVal > secondVal) {
+      storageVal = firstVal;
+      sortedArr[i] = secondVal;
+      sortedArr[i + 1] = storageVal;
+      sorted = false;
+    }
+    // if (sortedArr[i + 1] > maxElem) {
+    //   maxElem = sortedArr[i + 1];
+    //   maxIndex = i + 1;
+    // }
+    // if (sortedArr[i] < minElem) {
+    //   minElem = sortedArr[i];
+    //   minIndex = i;
+    // }
+  }
+  // sortedArr.splice(minIndex, 1);
+  // sortedArr.unshift(minElem);
+  // if (minIndex > maxIndex) {
+  //   sortedArr.splice(maxIndex + 1, 1);
+  //   sortedArr.push(maxElem);
+  // } else if (minIndex < maxIndex) {
+  //   sortedArr.splice(maxIndex, 1);
+  //   sortedArr.push(maxElem);
+  // }
+  if (!sorted) {
+    return bubbleSort(sortedArr);
+  } else {
+    return sortedArr;
+  }
 };
+
+// WORST-CASE TIME COMPLEXITY = O(N^2)

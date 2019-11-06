@@ -58,13 +58,13 @@ var insertionSort = function(array, cb=null, index=0) {
       if (cb) {
         if (cb(selectedNum.value, solutionsArr[i].value) > 0) {
           insertionIndex = i + 1;
-        } else if (cb(selectedNum.value, solutionsArr[i].value) === 0 && selectedNum.order > solutionsArr[i].order) {
+        } else if (cb(selectedNum.value, solutionsArr[i].value) === 0 && selectedNum.order > solutionsArr[i].i) {
           insertionIndex = i + 1;
         }
       } else {
         if (selectedNum.value > solutionsArr[i].value) {
           insertionIndex = i + 1;
-        } else if (selectedNum.value === solutionsArr[i].value && selectedNum.order > solutionsArr[i].order) {
+        } else if (selectedNum.value === solutionsArr[i].value && selectedNum.order > solutionsArr[i].i) {
           insertionIndex = i + 1;
         }
       }

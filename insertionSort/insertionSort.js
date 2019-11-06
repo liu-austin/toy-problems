@@ -1,3 +1,4 @@
+// jshint esversion:6
 /**
  * Insertion sort is a basic sorting algorithm.
  *
@@ -45,8 +46,31 @@ var testingTransform = function(array) {
   return transform;
 };
 
-var insertionSort = function(array
-) {
+var insertionSort = function(array, cb=null, index=0) {
   // Your code goes here. Feel free to add helper functions if needed.
+  var transformed = array;
+  var solutionsArr = transformed.slice(0, index);
+  
+  if (index !== transformed.length) {
+    var selectedNum = transformed[index];
+    var insertionIndex = 0;
+    for (var i = 0; i < solutionsArr.length; i++) {
+      if (cb) {
+        if (cb(selectedNum.value, solutionsArr[i].value) > 0) {
+          insertionIndex = i + 1;
+        } else if (cb(selectedNum.value, solutionsArr[i].value) === 0 && selectedNum.order > solutionsArr[i].order) {
+          insertionIndex = i + 1;
+        }
+      } else {
+        if (selectedNum.value > solutionsArr[i].value) {
+          insertionIndex = i + 1;
+        } else if (selectedNum.value === solutionsArr[i].value && selectedNum.order > solutionsArr[i].order) {
+          insertionIndex = i + 1;
+        }
+      }
+    }
+    solutionsArr.splice(insertionIndex, 0, selectedNum);
+    return insertionSort(solutionsArr.concat(transformed.slice(index + 1)), cb, index + 1); 
+  } 
   return array;
 };

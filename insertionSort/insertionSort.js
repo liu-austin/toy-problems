@@ -69,7 +69,10 @@ var insertionSort = function(array, cb=null, index=0) {
       }
     }
     solutionsArr.splice(insertionIndex, 0, selectedNum);
-    array = solutionsArr.concat(array.slice(index + 1));
+    var temp = solutionsArr.concat(array.slice(index + 1));
+    for (var j = 0; j < array.length; j++) {
+      array[j] = temp[j];
+    }
     return insertionSort(array, cb, index + 1); 
   } 
   return array;

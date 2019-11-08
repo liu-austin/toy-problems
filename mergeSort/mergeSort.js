@@ -96,8 +96,6 @@
  *
  */
 
-// [[4],[7],[4],[3],[9],[1],[2]] -> [[4,7],[3,4],[1,9],[2]]
-
 var mergeSort = function(array) {
   // Your code here.
   let subArr = [];

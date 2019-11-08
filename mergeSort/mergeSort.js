@@ -98,6 +98,9 @@
 
 var mergeSort = function(array) {
   // Your code here.
+  if (array.length <= 1) {
+    return;
+  }
   let subArr = [];
   for (let i = 0; i < array.length; i++) {
     subArr.push([array[i]]);

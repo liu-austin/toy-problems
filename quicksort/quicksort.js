@@ -53,42 +53,42 @@ var quicksort = function(array) {
 
 // a = quicksort([1,5,2]);
 
-function partition(array, left, right) {
-    let pivot = array[Math.floor((right + left) / 2)];
-    let i = left;
-    let j = right;
-    while (i <= j) {
-        while (array[i] < pivot) {
-            i++;
-        }
-        while (array[j] > pivot) {
-            j--;
-        }
-        if (i <= j) {
-            swap(array, i, j);
-            i++;
-            j--;
-        }
-    }
-    return i;
-}
+// function partition(array, left, right) {
+//     let pivot = array[Math.floor((right + left) / 2)];
+//     let i = left;
+//     let j = right;
+//     while (i <= j) {
+//         while (array[i] < pivot) {
+//             i++;
+//         }
+//         while (array[j] > pivot) {
+//             j--;
+//         }
+//         if (i <= j) {
+//             swap(array, i, j);
+//             i++;
+//             j--;
+//         }
+//     }
+//     return i;
+// }
 
-function quicksort(array, left=0, right=array.length - 1) {
-    var index;
-    if (array.length > 1) {
-        index = partition(array, left, right); 
-        if (left < index - 1) {
-            quicksort(array, left, index - 1);
-        }
-        if (index < right) { 
-            quicksort(array, index, right);
-        }
-    }
-    return array;
-}
+// function quicksort(array, left=0, right=array.length - 1) {
+//     var index;
+//     if (array.length > 1) {
+//         index = partition(array, left, right); 
+//         if (left < index - 1) {
+//             quicksort(array, left, index - 1);
+//         }
+//         if (index < right) { 
+//             quicksort(array, index, right);
+//         }
+//     }
+//     return array;
+// }
 
-function swap(array, leftIndex, rightIndex) {
-    var temp = array[leftIndex];
-    array[leftIndex] = array[rightIndex];
-    array[rightIndex] = temp;
-};
+// function swap(array, leftIndex, rightIndex) {
+//     var temp = array[leftIndex];
+//     array[leftIndex] = array[rightIndex];
+//     array[rightIndex] = temp;
+// };

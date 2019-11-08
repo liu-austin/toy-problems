@@ -11,43 +11,47 @@
  *    Combines the two arrays and the pivot into a sorted array.
  */
 
+var quicksort = function(array) {
+    let left = [];
+    let right = [];
+    let midpointIndex = Math.floor((array.length - 1) / 2);
+    let pivot = array[midpointIndex];
+    let sorted = [];
+    let sortedLeft;
+    let sortedRight;
 
-// var quicksort = function(array) {
-//     let left = [];
-//     let right = [];
-//     let midpointIndex = Math.floor((array.length - 1) / 2);
-//     let pivot = array[midpointIndex];
-//     let sorted = [];
+    for (let i = 0; i < array.length; i++) {
+        if (i !== midpointIndex) {
+            if (array[i] <= pivot) {
+                left.push(array[i]);
+            } else {
+                right.push(array[i]);
+            }
+        }
+    }
 
-//     for (let i = 0; i < array.length; i++) {
-//         if (i !== midpointIndex) {
-//             if (array[i] <= pivot) {
-//                 left.push(array[i]);
-//             } else {
-//                 right.push(array[i]);
-//             }
-//         }
-//     }
-//     if (left.length === 1) {
-//         sorted.push(left[0]);
-//     } else if (left.length !== 0) {
-//         sorted.concat(quicksort(left));
-//     }
+    if (left.length === 1) {
+        sorted.push(left[0]);
+    } else if (left.length !== 0) {
+        sortedLeft = quicksort(left);
+        sorted = (sortedLeft);
+    }
 
-//     sorted.push(pivot);
+    sorted.push(pivot);
 
-//     if (right.length === 1) {
-//         sorted.push(right[0]);
-//     } else if (right.length !== 0) {
-//         sorted.concat(quicksort(right));
-//     }
+    if (right.length === 1) {
+        sorted.push(right[0]);
+    } else if (right.length !== 0) {
+        sortedRight = quicksort(right);
+        for (let j = 0; j < sortedRight.length; j++) {
+            sorted.push(sortedRight[j]);
+        }
+    }
 
-//     return sorted;
+    return sorted;
+};
 
-// };
-
-// a = quicksort([1,5,2,4,8,3,-1]);
-
+// a = quicksort([1,5,2]);
 
 function partition(array, left, right) {
     let pivot = array[Math.floor((right + left) / 2)];
@@ -83,8 +87,8 @@ function quicksort(array, left=0, right=array.length - 1) {
     return array;
 }
 
-function swap(array, leftIndex, rightIndex){
+function swap(array, leftIndex, rightIndex) {
     var temp = array[leftIndex];
     array[leftIndex] = array[rightIndex];
     array[rightIndex] = temp;
-}
+};

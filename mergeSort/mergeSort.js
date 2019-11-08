@@ -1,3 +1,4 @@
+// jshint esversion:6
 /**
  * Implement a function that sorts an array of numbers using the "mergesort" algorithm.
  *
@@ -79,7 +80,7 @@
  *   What is the complexity of your algorithm in time and space?
  *   The merge step can be implemented using what is conceptually an insertion sort, and yet its time
  *   complexity is (spoiler alert!) much lower. Why is that?
- *
+ *   TIME-COMPLETXITY: N LOG N because size of input array to sort is decreasing by half each time
  *
  * Extra credit:
  *   One of the benefits of mergesort over e.g. quicksort is that it is "stable"; assuming the merge
@@ -95,8 +96,44 @@
  *
  */
 
-
+// [[4],[7],[4],[3],[9],[1],[2]] -> [[4,7],[3,4],[1,9],[2]]
 
 var mergeSort = function(array) {
   // Your code here.
+  let subArr = [];
+  for (let i = 0; i < array.length; i++) {
+    subArr.push([array[i]]);
+  }
+  while (subArr.length > 1) {
+    subArr = groupSubArrays(subArr);
+  }
+  for (let i = 0; i < subArr[0].length; i++) {
+    array[i] = subArr[0][i];
+  }
+};
+
+var groupSubArrays = function(arr) {
+  let groupedArrs = [];
+  for (let i = 0; i < arr.length; i += 2) {
+    if (arr[i + 1]) {
+      groupedArrs.push(sortSubArray(arr[i], arr[i + 1]));
+    } else {
+      groupedArrs.push(arr[i]);
+    }
+  }
+  return groupedArrs;
+};
+
+var sortSubArray = function(arr, arr2) {
+  for (let h = 0; h < arr2.length; h++) {
+    let addedValue = arr2[h];
+    let insertIndex = 0;
+    for (let i = 0; i < arr.length; i++) {
+      if (addedValue > arr[i]) {
+        insertIndex += 1;
+      }
+    }
+    arr.splice(insertIndex, 0, addedValue);
+  }
+  return arr;
 };

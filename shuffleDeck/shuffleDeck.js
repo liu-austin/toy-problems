@@ -49,11 +49,19 @@ var shuffleDeck = function(deck) {
   // for (let i = 0; i < deck.length; i++) {
   //   deck[i] = shuffled[i];
   // }
-    let i = 0;
-    let j = 0;
-    let temp = null;
+    // let i = 0;
+    // let j = 0;
+    // let temp = null;
   
-    for (i = deck.length - 1; i > 0; i -= 1) {
+    // for (i = deck.length - 1; i > 0; i -= 1) {
+    //   j = Math.floor(Math.random() * (i + 1));
+    //   temp = deck[i];
+    //   deck[i] = deck[j];
+    //   deck[j] = temp;
+    // }
+    let j;
+    let temp;
+    for (let i = deck.length - 1; i > 0; i--) {
       j = Math.floor(Math.random() * (i + 1));
       temp = deck[i];
       deck[i] = deck[j];

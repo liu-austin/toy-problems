@@ -1,3 +1,4 @@
+// jshint esversion:6
 /**
  * Given an array containing a deck of cards, implement a function that shuffles
  * the deck.
@@ -33,6 +34,31 @@
 
 var shuffleDeck = function(deck) {
   // Your code here
+  // let shuffled = [];
+  // let remainingIndices = [];
+  // let randomIndex;
+  // for (let i = 0; i < deck.length; i++) {
+  //   remainingIndices.push(i);
+  // }
+  // for (let i = 0; i < deck.length; i++) {
+  //   randomIndex = remainingIndices[Math.floor(Math.random() * (remainingIndices.length - 1))];
+  //   remainingIndices.splice(randomIndex, 1);
+  //   shuffled.push(deck[randomIndex]);
+  //   console.log(randomIndex);
+  // }
+  // for (let i = 0; i < deck.length; i++) {
+  //   deck[i] = shuffled[i];
+  // }
+    let i = 0;
+    let j = 0;
+    let temp = null;
+  
+    for (i = deck.length - 1; i > 0; i -= 1) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = deck[i];
+      deck[i] = deck[j];
+      deck[j] = temp;
+    }
 };
 
 // Ordered deck generator provided for your testing convenience
@@ -50,3 +76,5 @@ var orderedDeck = function() {
 
   return deck;
 };
+
+// 0123456789

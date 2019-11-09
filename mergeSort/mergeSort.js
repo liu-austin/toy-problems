@@ -39,7 +39,7 @@
  *   2. Both sides are sorted recursively:
  *   [4, 7, 4] -> [4, 4, 7]
  *   [3, 9, 1, 2] -> [1, 2, 3, 9]
- *
+ *3474912
  *   3. Both halves are merged:
  *   [4, 7, 4], [3, 9, 1, 2] -> [1, 2, 3, 4, 4, 7, 9]
  *
@@ -96,45 +96,89 @@
  *
  */
 
-var mergeSort = function(array) {
-  // Your code here.
+// var mergeSort = function(array) {
+//   // Your code here.
+//   if (array.length <= 1) {
+//     return array[0];
+//   }
+//   let subArr = [];
+//   if (Array.isArray(array[0])) {
+//     for (let i = 0; i < array.length; i++) {
+//       subArr.push(array[i]);
+//     }
+//   } else {
+//     for (let i = 0; i < array.length; i++) {
+//       subArr.push([array[i]]);
+//     }
+//   }
+
+//   subArr = groupSubArrays(subArr);
+//   // for (let i = 0; i < subArr[0].length; i++) {
+//   //   array[i] = subArr[0][i];
+//   // }
+//   return mergeSort(subArr);
+// };
+
+// var groupSubArrays = function(arr) {
+//   let groupedArrs = [];
+//   for (let i = 0; i < arr.length; i += 2) {
+//     if (arr[i + 1]) {
+//       groupedArrs.push(sortSubArray(arr[i], arr[i + 1]));
+//     } else {
+//       groupedArrs.push(arr[i]);
+//     }
+//   }
+//   return groupedArrs;
+// };
+
+// var sortSubArray = function(arr, arr2) {
+//   for (let h = 0; h < arr2.length; h++) {
+//     let addedValue = arr2[h];
+//     let insertIndex = 0;
+//     for (let i = 0; i < arr.length; i++) {
+//       if (addedValue > arr[i]) {
+//         insertIndex += 1;
+//       }
+//     }
+//     arr.splice(insertIndex, 0, addedValue);
+//   }
+//   return arr;
+// };
+
+function mergeSort(array) {
   if (array.length <= 1) {
-    return;
+    return array;
   }
-  let subArr = [];
-  for (let i = 0; i < array.length; i++) {
-    subArr.push([array[i]]);
-  }
-  while (subArr.length > 1) {
-    subArr = groupSubArrays(subArr);
-  }
-  for (let i = 0; i < subArr[0].length; i++) {
-    array[i] = subArr[0][i];
-  }
-};
+  const middle = Math.floor((array.length) / 2);
+  const left = array.slice(0, middle);
+  const right = array.slice(middle);
 
-var groupSubArrays = function(arr) {
-  let groupedArrs = [];
-  for (let i = 0; i < arr.length; i += 2) {
-    if (arr[i + 1]) {
-      groupedArrs.push(sortSubArray(arr[i], arr[i + 1]));
+  let filler = merge(mergeSort(left), mergeSort(right));
+  while (!filler.length) {
+    
+  }
+  for (let i = 0; i < filler.length; i++) {
+    array[i] = filler[i];
+  }
+}
+
+function merge(left, right) {
+  let resultArr = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  while (leftIndex < left.length && rightIndex < right.length) {
+    if (left[leftIndex] < right[rightIndex]) {
+      resultArr.push(left[leftIndex]);
+      leftIndex++; 
     } else {
-      groupedArrs.push(arr[i]);
+      resultArr.push(right[rightIndex]);
+      rightIndex++; 
     }
   }
-  return groupedArrs;
-};
 
-var sortSubArray = function(arr, arr2) {
-  for (let h = 0; h < arr2.length; h++) {
-    let addedValue = arr2[h];
-    let insertIndex = 0;
-    for (let i = 0; i < arr.length; i++) {
-      if (addedValue > arr[i]) {
-        insertIndex += 1;
-      }
-    }
-    arr.splice(insertIndex, 0, addedValue);
-  }
-  return arr;
-};
+  return resultArr.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
+
+
+

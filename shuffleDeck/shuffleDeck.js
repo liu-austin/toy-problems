@@ -67,6 +67,7 @@ var shuffleDeck = function(deck) {
       deck[i] = deck[j];
       deck[j] = temp;
     }
+    return deck;
 };
 
 // Ordered deck generator provided for your testing convenience

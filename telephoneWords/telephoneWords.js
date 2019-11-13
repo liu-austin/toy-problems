@@ -1,3 +1,4 @@
+// jshint esversion:6
 /*
   * Each number key on a standard phone keypad has a set of Latin letters written on
   * it as well: http://en.wikipedia.org/wiki/File:Telephone-keypad2.svg
@@ -40,7 +41,23 @@ var phoneDigitsToLetters = {
   9: 'WXYZ'
 };
 
-
-var telephoneWords = function(digitString) {
+var telephoneWords = function(digitString, index=0, inputArr=[]) {
   // TODO: return every combination that can be spelled on a phone with these digits
+  let outputArr = [];
+  if (index === digitString.length) {
+    return inputArr;
+  } else {
+    if (!index) {
+      for (let i = 0; i < phoneDigitsToLetters[digitString[index]].length; i++) {
+        outputArr.push(phoneDigitsToLetters[digitString[index]][i]);
+      }
+    } else {
+      for (let i = 0; i < inputArr.length; i++) {
+        for (let j = 0; j < phoneDigitsToLetters[digitString[index]].length; j++) {
+          outputArr.push(inputArr[i] + phoneDigitsToLetters[digitString[index]][j]);
+        }
+      }
+    }
+    return telephoneWords(digitString, index + 1, outputArr);
+  }
 };

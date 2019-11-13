@@ -10,7 +10,6 @@
 var firstNonRepeatedCharacter = function(string) {
   // TODO: your solution here
   let chars = {};
-  let key = 0;
   for (let i = 0; i < string.length; i++) {
     if (!chars[string[i]]) {
       chars[string[i]] = {i, occ: 1};

@@ -21,6 +21,11 @@ var allAnagrams = function(string, index=0, inputArr=[]) {
   }
   let outputArr = [];
   if (index === string.length) {
+    for (let i = 0; i < inputArr.length; i++) {
+      if (!outputArr.includes(inputArr[i])) {
+        outputArr.push(inputArr[i]);
+      }
+    }
     return inputArr;
   }
   if (index === 0) {

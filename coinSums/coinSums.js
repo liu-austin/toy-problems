@@ -40,7 +40,7 @@ var makeChange = function(total) {
     var combinations = 1;
     for (var i  = total - 1; i > -1; i--) {
         for (var j = 0; j < coinValues.length; j++) {
-            if ((total - i) % coinValue[j] === 0) {
+            if ((total - i) % coinValues[j] === 0) {
                 combinations += 1;
             }
         }

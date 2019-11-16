@@ -1,3 +1,4 @@
+// jshint esversion:6
 /*
 
 In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
@@ -34,16 +35,41 @@ makeChange(2) === 2
 //     '£2': 200
 // };
 
+// var makeChange = function(coinValues, total) {
+//     // case using '1p'
+//     // var coinValues = [1,2,5,10,20,50,100,200];
+
+//     let minCoins = new Array(total + 1).fill(Infinity);
+//     minCoins[0] = 0;
+    
+//     for (let i = 1; i < minCoins.length; i++) {
+//         for (let j = 0; j < coinValues.length; j++) {
+//             const coinValue = coinValues[j];
+//             if (coinValue <= i) {
+//                 minCoins[i] = Math.min(minCoins[i - coinValue] + 1, minCoins[i]);
+//             }
+//         }
+//     }
+//     const answer = minCoins.reduce((a,b) => a + b);
+//     return answer === Infinity ? - 1 : answer;
+// };
+
 var makeChange = function(total) {
-    // case using '1p'
     var coinValues = [2,5,10,20,50,100,200];
-    var combinations = 1;
-    for (var i  = total - 1; i > -1; i--) {
-        for (var j = 0; j < coinValues.length; j++) {
-            if ((total - i) % coinValues[j] === 0) {
-                combinations += 1;
-            }
+    if (total < 1) {
+        return 0;
+    }
+    var combinations = 0;
+    if (total === 1) {
+        combinations += 1;
+    }
+    // for (var i = 1; i <= total; i++) {
+    for (var j = 0; j < coinValues.length; j++) {
+        if (i % coinValues[j] === 0) {
+            combinations += 1;
         }
     }
-    return combinations;
+    combinations
+    // }
+
 };

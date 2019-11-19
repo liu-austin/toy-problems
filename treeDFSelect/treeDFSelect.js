@@ -1,3 +1,4 @@
+// jshint esversion:6
 /**
   *
   * Implement a `DFSelect` method on this Tree class.
@@ -35,7 +36,23 @@ var Tree = function(value) {
   this.children = [];
 };
 
-Tree.prototype.DFSelect = function(filter) {
+Tree.prototype.DFSelect = function(filter, depth=0) {
+  this.depth = depth;
+  let returnStr = '';
+  if (filter(this.value, this.depth)) {
+    returnStr += (this.value);
+  }
+  for (let i = 0; i < this.children.length; i++) {
+    returnStr += (this.children[i].DFSelect(filter, depth + 1));
+  }
+  let returnArr = [];
+
+  for (let i = 0; i < returnStr.length; i++) {
+    if (returnStr[i] !== ',') {
+      returnArr.push(Number(returnStr[i]));
+    }
+  }
+  return returnArr;
 };
 
 

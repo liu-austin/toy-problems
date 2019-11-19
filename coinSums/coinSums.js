@@ -54,22 +54,44 @@ makeChange(2) === 2
 //     return answer === Infinity ? - 1 : answer;
 // };
 
-var makeChange = function(total) {
-    var coinValues = [2,5,10,20,50,100,200];
+// var makeChange = function(total) {
+//     var coinValues = [2,5,10,20,50,100,200];
+//     if (total < 1) {
+//         return 0;
+//     }
+//     var combinations = 0;
+//     if (total === 1) {
+//         combinations += 1;
+//     }
+//     // for (var i = 1; i <= total; i++) {
+//     for (var j = 0; j < coinValues.length; j++) {
+
+//         if (total % coinValues[j] === 0) {
+//             combinations += 1;
+//         }
+
+//     }
+//     combinations += makeChange(total - 1);
+
+//     // }
+//     return combinations;
+// };
+
+const makeChange = (total, current=0, index=0) => {
+    // assume sorted
+    let coinValues = [1,2,5,10,20,50,100,200];
+    let combinations = 0;
     if (total < 1) {
         return 0;
     }
-    var combinations = 0;
-    if (total === 1) {
-        combinations += 1;
-    }
-    // for (var i = 1; i <= total; i++) {
-    for (var j = 0; j < coinValues.length; j++) {
-        if (i % coinValues[j] === 0) {
-            combinations += 1;
+    if (current === total) {
+        return 1;
+    } else if (current > total) {
+        return 0; 
+    } else {
+        for (let i = index; i < coinValues.length; i++) {
+            combinations += makeChange(total, current + coinValues[i], i);
         }
     }
-    combinations
-    // }
-
+    return combinations;
 };

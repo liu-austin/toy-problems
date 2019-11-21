@@ -1,4 +1,4 @@
-
+// jshint esversion:6
 /**
   * Implement the `countLeaves` function in this Tree class.
   *
@@ -39,6 +39,15 @@ var Tree = function(value) {
 
 Tree.prototype.countLeaves = function () {
   // TODO: implement me!
+  let leaves = 0;
+  if (!this.children.length) {
+    leaves += 1;
+  } else {
+    for (let i = 0; i < this.children.length; i++) {
+      leaves += this.children[i].countLeaves();
+    }
+  }
+  return leaves;
 };
 
 /**

@@ -1,3 +1,4 @@
+// jshint esversion:6
 /**
   *
   * Implement a `BFSelect` method on this Tree class.
@@ -35,10 +36,19 @@ var Tree = function(value) {
   this.children = [];
 };
 
-
-
-Tree.prototype.BFSelect = function(filter) {
+Tree.prototype.BFSelect = function(filter, depth=0) {
   // return an array of values for which the function filter(value, depth) returns true
+  this.depth = depth;
+  let arr = '';
+  if (filter(this.value, this.depth)) arr += (this.value);
+  for (let i = 0; i < this.children.length; i++) {
+    arr += (this.children[i].BFSelect(filter, depth + 1));
+  }
+  if (!depth) {
+    return arr.split('').map(elem => Number(elem)).sort((a, b) => a - b);
+  } else {
+    return arr;
+  }
 };
 
 /**
